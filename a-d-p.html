@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Degrees of Adjectives | Class 7</title>
+
+  <style>
+    :root {
+      --bg: #eef3f8;
+      --surface: #ffffff;
+      --surface-2: #e8f3ff;
+      --text: #132238;
+      --muted: #536579;
+      --primary: #0878f9;
+      --primary-dark: #0757b5;
+      --accent: #ff8a00;
+      --good: #0f8b5f;
+      --bad: #d43131;
+      --border: #cfdbea;
+      --shadow: 0 12px 30px rgba(20, 43, 74, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .app {
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(
+        135deg,
+        #0b2d5c 0%,
+        #0878f9 55%,
+        #00a6a6 100%
+      );
+      color: white;
+      padding: 48px 20px 42px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 1.08rem;
+      opacity: 0.96;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav a {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 10px;
+    }
+
+    nav a:hover {
+      background: var(--surface-2);
+      color: var(--primary-dark);
+    }
+
+    /* MAIN */
+    main {
+      width: min(1100px, calc(100% - 32px));
+      margin: 28px auto 50px;
+    }
+
+    section {
+      scroll-margin-top: 78px;
+      margin-bottom: 28px;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .degree {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      background: var(--surface-2);
+      box-shadow: 0 8px 18px rgba(11, 45, 92, 0.08);
+    }
+
+    .degree h3 {
+      margin-top: 0;
+    }
+
+    .example {
+      background: var(--surface);
+      border-left: 4px solid var(--primary);
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    .degree:nth-child(2) .example {
+      border-left-color: var(--accent);
+    }
+
+    .degree:nth-child(3) .example {
+      border-left-color: var(--good);
+    }
+
+    .card h2 {
+      color: #0b2d5c;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.7rem;
+    }
+
+    h3 {
+      color: var(--primary-dark);
+    }
+
+    /* TABLE */
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--surface-2);
+    }
+
+    /* FINAL QUIZ */
+    .quiz-q {
+      margin: 20px 0;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .option:hover {
+      background: var(--surface-2);
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    /* BUTTONS */
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+    }
+
+    button:not(.secondary) {
+      box-shadow: 0 6px 14px rgba(8, 120, 249, 0.24);
+    }
+
+    button.secondary {
+      background: #64748b;
+    }
+
+    /* RESULTS */
+    .result {
+      margin-top: 16px;
+      font-weight: 700;
+      min-height: 28px;
+    }
+
+    .good {
+      color: var(--good);
+    }
+
+    .bad {
+      color: var(--bad);
+    }
+
+    /* TIP */
+    .tip {
+      background: #fff4db;
+      border: 1px solid #f1c56c;
+      padding: 14px;
+      border-radius: 12px;
+    }
+
+    /* TOPICS */
+    .topic {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 18px;
+      background: var(--surface);
+      box-shadow: 0 8px 20px rgba(20, 43, 74, 0.07);
+    }
+
+    .topic-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .topic-badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 0.86rem;
+    }
+
+    .topic:nth-of-type(2) .topic-badge {
+      background: #fff0d9;
+      color: #a65300;
+    }
+
+    .topic:nth-of-type(3) .topic-badge {
+      background: #e5f7ee;
+      color: #08764f;
+    }
+
+    .topic:nth-of-type(4) .topic-badge {
+      background: #e6efff;
+      color: #2453a6;
+    }
+
+    /* SPORTS BOXES */
+    .sport {
+      background: #edf9f5;
+      border-left: 4px solid #00a6a6;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    /* MINI QUIZZES */
+    .mini-quiz {
+      margin-top: 18px;
+      padding: 16px;
+      background: var(--surface-2);
+      border-radius: 12px;
+      border: 1px solid #c6dfff;
+    }
+
+    .mini-quiz label {
+      display: block;
+      margin: 8px 0;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    .mini-result {
+      min-height: 24px;
+      margin-top: 10px;
+      font-weight: 700;
+    }
+
+    .next-btn {
+      margin-top: 12px;
+      display: none;
+    }
+
+    .locked {
+      opacity: 0.6;
+    }
+
+    .hidden-topic {
+      display: none;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 26px 16px 36px;
+      color: #dcecff;
+      font-weight: 700;
+      background: #0b2d5c;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header>
+      <h1>Degrees of Adjectives</h1>
+      <p>
+        Class 7 English Grammar — learn, practise, and test yourself!
+      </p>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav>
+      <a href="#learn">Learn</a>
+      <a href="#topics">Topics</a>
+      <a href="#rules">Rules</a>
+      <a href="#examples">Examples</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+
+    <main>
+
+      <!-- INTRODUCTION -->
+      <section id="learn">
+
+        <div class="card">
+
+          <h2>What are Degrees of Adjectives?</h2>
+
+          <p>
+            An <strong>adjective</strong> describes a noun or pronoun.
+            For example,
+            <em>tall</em>, <em>beautiful</em>, and
+            <em>interesting</em> are adjectives.
+          </p>
+
+          <p>
+            The <strong>degrees of adjectives</strong> show different levels
+            of comparison. There are three degrees:
+          </p>
+
+          <div class="grid">
+
+            <div class="degree">
+              <h3>1. Positive Degree</h3>
+
+              <p>
+                It simply describes one person, place, animal, or thing.
+                It does not compare.
+              </p>
+
+              <div class="example">
+                <strong>Avyan is an excellent football player.</strong>
+              </div>
+            </div>
+
+            <div class="degree">
+              <h3>2. Comparative Degree</h3>
+
+              <p>
+                It compares <strong>two</strong> people, places,
+                animals, or things.
+              </p>
+
+              <div class="example">
+                <strong>
+                  Avyan is more focused than Darsh during the match.
+                </strong>
+              </div>
+            </div>
+
+            <div class="degree">
+              <h3>3. Superlative Degree</h3>
+
+              <p>
+                It compares <strong>three or more</strong> and shows
+                the highest or lowest degree.
+              </p>
+
+              <div class="example">
+                <strong>
+                  Avyan is the most encouraging player on the team.
+                </strong>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="sport">
+            <strong>Class team:</strong>
+            “Avyan is helpful and positive, Darsh is mischievous and can
+            sometimes distract the team, and Prabhav is smart and
+            quick-thinking.”
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- TOPIC JOURNEY -->
+      <section id="topics">
+
+        <div class="card">
+
+          <h2>Lesson Journey 🏆</h2>
+
+          <p>
+            Finish each mini quiz to unlock the next topic.
+            Every example uses a sporty sentence!
+          </p>
+
+
+          <!-- TOPIC 1 -->
+          <div class="topic" id="topic1">
+
+            <div class="topic-head">
+
+              <div>
+                <span class="topic-badge">Topic 1</span>
+                <h3>Know the Three Degrees</h3>
+              </div>
+
+              <strong>🏃 Easy Start</strong>
+
+            </div>
+
+            <p>
+              <strong>Positive</strong> describes one:
+              “Avyan is fast on the football field.”
+            </p>
+
+            <p>
+              <strong>Comparative</strong> compares two:
+              “Avyan is faster than Darsh in a sprint.”
+            </p>
+
+            <p>
+              <strong>Superlative</strong> compares three or more:
+              “Avyan is the most encouraging player on the team.”
+            </p>
+
+            <div class="sport">
+              <strong>Sports sentence:</strong>
+              “Prabhav is smart during the game.” →
+              “Prabhav is more alert than Darsh during the drill.” →
+              “Avyan is the most encouraging player on the field.”
+            </div>
+
+
+            <div class="mini-quiz">
+
+              <strong>Quick Check:</strong>
+              Which degree compares two players?
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini1"
+                  value="positive"
+                >
+                Positive
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini1"
+                  value="comparative"
+                >
+                Comparative
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini1"
+                  value="superlative"
+                >
+                Superlative
+              </label>
+
+              <button
+                type="button"
+                onclick="checkMini(1, 'comparative')"
+              >
+                Check
+              </button>
+
+              <div
+                id="miniResult1"
+                class="mini-result"
+                aria-live="polite"
+              ></div>
+
+              <button
+                type="button"
+                id="next1"
+                class="next-btn"
+                onclick="unlockTopic(2)"
+              >
+                Next Topic →
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOPIC 2 -->
+          <div class="topic hidden-topic" id="topic2">
+
+            <div class="topic-head">
+
+              <div>
+                <span class="topic-badge">Topic 2</span>
+                <h3>How to Form Comparatives &amp; Superlatives</h3>
+              </div>
+
+              <strong>⚽ Build the Form</strong>
+
+            </div>
+
+            <p>
+              For many short adjectives, add
+              <strong>-er</strong> and <strong>-est</strong>:
+              fast → faster → fastest.
+            </p>
+
+            <p>
+              For adjectives ending in <strong>-y</strong>,
+              change y to i:
+              happy → happier → happiest.
+            </p>
+
+            <p>
+              For longer adjectives, use
+              <strong>more</strong> and <strong>most</strong>:
+              exciting → more exciting → most exciting.
+            </p>
+
+            <div class="sport">
+              <strong>Sports sentences:</strong>
+              “Avyan is faster than Darsh.”
+              “This is the most exciting match of the season.”
+              “Prabhav is happier after making a smart assist.”
+            </div>
+
+
+            <div class="mini-quiz">
+
+              <strong>Quick Check:</strong>
+              Choose the correct forms of “strong”.
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini2"
+                  value="strong-stronger-strongest"
+                >
+                strong → stronger → strongest
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini2"
+                  value="strong-more-strong-most-strong"
+                >
+                strong → more strong → most strong
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini2"
+                  value="stronger-strongest-strong"
+                >
+                stronger → strongest → strong
+              </label>
+
+              <button
+                type="button"
+                onclick="checkMini(
+                  2,
+                  'strong-stronger-strongest'
+                )"
+              >
+                Check
+              </button>
+
+              <div
+                id="miniResult2"
+                class="mini-result"
+                aria-live="polite"
+              ></div>
+
+              <button
+                type="button"
+                id="next2"
+                class="next-btn"
+                onclick="unlockTopic(3)"
+              >
+                Next Topic →
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOPIC 3 -->
+          <div class="topic hidden-topic" id="topic3">
+
+            <div class="topic-head">
+
+              <div>
+                <span class="topic-badge">Topic 3</span>
+                <h3>Irregular Adjectives &amp; Smart Usage</h3>
+              </div>
+
+              <strong>🏏 Level Up</strong>
+
+            </div>
+
+            <p>
+              Some adjectives do not follow the usual patterns.
+              Learn them as special forms:
+            </p>
+
+            <div class="table-wrap">
+
+              <table>
+
+                <thead>
+
+                  <tr>
+                    <th>Positive</th>
+                    <th>Comparative</th>
+                    <th>Superlative</th>
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  <tr>
+                    <td>good</td>
+                    <td>better</td>
+                    <td>best</td>
+                  </tr>
+
+                  <tr>
+                    <td>bad</td>
+                    <td>worse</td>
+                    <td>worst</td>
+                  </tr>
+
+                  <tr>
+                    <td>far</td>
+                    <td>farther / further</td>
+                    <td>farthest / furthest</td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+            <div class="sport">
+              <strong>Sports sentences:</strong>
+              “Avyan is better at football than Darsh.”
+              “Prabhav made the best tactical decision of the game.”
+              “Darsh's most distracting moment came when he started
+              joking during the drill.”
+            </div>
+
+
+            <div class="mini-quiz">
+
+              <strong>Quick Check:</strong>
+
+              Complete:
+
+              “Arjun is ___ player on our basketball team.”
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini3"
+                  value="good"
+                >
+                good
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini3"
+                  value="better"
+                >
+                better
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini3"
+                  value="best"
+                >
+                the best
+              </label>
+
+              <button
+                type="button"
+                onclick="checkMini(3, 'best')"
+              >
+                Check
+              </button>
+
+              <div
+                id="miniResult3"
+                class="mini-result"
+                aria-live="polite"
+              ></div>
+
+              <button
+                type="button"
+                id="next3"
+                class="next-btn"
+                onclick="unlockTopic(4)"
+              >
+                Next Topic →
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOPIC 4 -->
+          <div class="topic hidden-topic" id="topic4">
+
+            <div class="topic-head">
+
+              <div>
+                <span class="topic-badge">Topic 4</span>
+                <h3>Sports Sentence Challenge 🥇</h3>
+              </div>
+
+              <strong>🏆 Final Warm-Up</strong>
+
+            </div>
+
+            <p>
+              Read the sentence, then spot the adjective and its degree.
+            </p>
+
+            <div class="sport">
+              <strong>Cricket:</strong>
+              “Avyan hit a powerful shot and encouraged Prabhav
+              from the boundary.”
+            </div>
+
+            <div class="sport">
+              <strong>Football:</strong>
+              “Avyan is quicker than Darsh in the sprint drill.”
+            </div>
+
+            <div class="sport">
+              <strong>Badminton:</strong>
+              “This racket is lighter than my old one.”
+            </div>
+
+            <div class="sport">
+              <strong>Swimming:</strong>
+              “Prabhav is very smart about choosing the right stroke
+              at the right time.”
+            </div>
+
+            <div class="sport">
+              <strong>Basketball:</strong>
+              “Avyan made a more accurate pass than Darsh
+              during practice.”
+            </div>
+
+
+            <div class="mini-quiz">
+
+              <strong>Quick Check:</strong>
+
+              In
+              “Avyan is the fastest runner in the relay,”
+              which degree is <em>fastest</em>?
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini4"
+                  value="positive"
+                >
+                Positive
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini4"
+                  value="comparative"
+                >
+                Comparative
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="mini4"
+                  value="superlative"
+                >
+                Superlative
+              </label>
+
+              <button
+                type="button"
+                onclick="checkMini(4, 'superlative')"
+              >
+                Check
+              </button>
+
+              <div
+                id="miniResult4"
+                class="mini-result"
+                aria-live="polite"
+              ></div>
+
+              <button
+                type="button"
+                class="next-btn"
+                id="finishJourney"
+                onclick="
+                  document
+                    .getElementById('quiz')
+                    .scrollIntoView({
+                      behavior: 'smooth'
+                    })
+                "
+              >
+                Go to Final Quiz 🏁
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- RULES -->
+      <section id="rules">
+
+        <div class="card">
+
+          <h2>Important Rules</h2>
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Type of adjective</th>
+                  <th>Positive</th>
+                  <th>Comparative</th>
+                  <th>Superlative</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>Short adjective</td>
+                  <td>tall</td>
+                  <td>taller</td>
+                  <td>tallest</td>
+                </tr>
+
+                <tr>
+                  <td>Ends in -y</td>
+                  <td>happy</td>
+                  <td>happier</td>
+                  <td>happiest</td>
+                </tr>
+
+                <tr>
+                  <td>Long adjective</td>
+                  <td>beautiful</td>
+                  <td>more beautiful</td>
+                  <td>most beautiful</td>
+                </tr>
+
+                <tr>
+                  <td>Irregular</td>
+                  <td>good</td>
+                  <td>better</td>
+                  <td>best</td>
+                </tr>
+
+                <tr>
+                  <td>Irregular</td>
+                  <td>bad</td>
+                  <td>worse</td>
+                  <td>worst</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <div class="tip">
+
+            <strong>Remember:</strong>
+
+            Comparative adjectives are often used with
+            <strong>than</strong>,
+            while superlative adjectives commonly use
+            <strong>the</strong>.
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- EXAMPLES -->
+      <section id="examples">
+
+        <div class="card">
+
+          <h2>More Examples</h2>
+
+          <div class="grid">
+
+            <div class="degree">
+
+              <h3>Fast</h3>
+
+              <p>
+                Positive:
+                Aarav is <strong>fast</strong>.
+              </p>
+
+              <p>
+                Comparative:
+                Aarav is <strong>faster than</strong> Kabir.
+              </p>
+
+              <p>
+                Superlative:
+                Aarav is <strong>the fastest</strong> runner.
+              </p>
+
+            </div>
+
+
+            <div class="degree">
+
+              <h3>Easy</h3>
+
+              <p>
+                Positive:
+                This lesson is <strong>easy</strong>.
+              </p>
+
+              <p>
+                Comparative:
+                This lesson is <strong>easier than</strong>
+                the last one.
+              </p>
+
+              <p>
+                Superlative:
+                This is <strong>the easiest</strong> lesson.
+              </p>
+
+            </div>
+
+
+            <div class="degree">
+
+              <h3>Interesting</h3>
+
+              <p>
+                Positive:
+                The book is <strong>interesting</strong>.
+              </p>
+
+              <p>
+                Comparative:
+                This book is
+                <strong>more interesting than</strong> that one.
+              </p>
+
+              <p>
+                Superlative:
+                This is
+                <strong>the most interesting</strong> book here.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="sport">
+            <strong>Football:</strong>
+
+            “The captain is calmer than the striker,
+            but the goalkeeper is the calmest player on the pitch.”
+          </div>
+
+          <div class="sport">
+            <strong>Cricket:</strong>
+
+            “This bowler is faster than the last bowler,
+            and that was the fastest delivery of the match.”
+          </div>
+
+          <div class="sport">
+            <strong>Tennis:</strong>
+
+            “My new serve is more powerful than my old serve.”
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FINAL QUIZ -->
+      <section id="quiz">
+
+        <div class="card">
+
+          <h2>Interactive Quiz 🎯</h2>
+
+          <p>
+            Choose one answer for each question,
+            then click <strong>Check Answers</strong>.
+          </p>
+
+
+          <form id="quizForm">
+
+
+            <!-- QUESTION 1 -->
+            <div class="quiz-q">
+
+              <p>
+                <strong>
+                  1. Which is the comparative form of “small”?
+                </strong>
+              </p>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q1"
+                  value="a"
+                >
+                smaller
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q1"
+                  value="b"
+                >
+                smallest
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q1"
+                  value="c"
+                >
+                more small
+              </label>
+
+            </div>
+
+
+            <!-- QUESTION 2 -->
+            <div class="quiz-q">
+
+              <p>
+                <strong>
+                  2. Which sentence compares two things?
+                </strong>
+              </p>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q2"
+                  value="a"
+                >
+                The blue car is fast.
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q2"
+                  value="b"
+                >
+                The blue car is faster than the red car.
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q2"
+                  value="c"
+                >
+                The blue car is the fastest.
+              </label>
+
+            </div>
+
+
+            <!-- QUESTION 3 -->
+            <div class="quiz-q">
+
+              <p>
+                <strong>
+                  3. What is the superlative form of “good”?
+                </strong>
+              </p>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q3"
+                  value="a"
+                >
+                goodest
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q3"
+                  value="b"
+                >
+                better
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q3"
+                  value="c"
+                >
+                best
+              </label>
+
+            </div>
+
+
+            <!-- QUESTION 4 -->
+            <div class="quiz-q">
+
+              <p>
+                <strong>
+                  4. Choose the correct form:
+                  “This is the ___ movie I have seen.”
+                </strong>
+              </p>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q4"
+                  value="a"
+                >
+                more exciting
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q4"
+                  value="b"
+                >
+                most exciting
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q4"
+                  value="c"
+                >
+                excitinger
+              </label>
+
+            </div>
+
+
+            <!-- QUESTION 5 -->
+            <div class="quiz-q">
+
+              <p>
+                <strong>
+                  5. What is the comparative form of “happy”?
+                </strong>
+              </p>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q5"
+                  value="a"
+                >
+                happiest
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q5"
+                  value="b"
+                >
+                happier
+              </label>
+
+              <label class="option">
+                <input
+                  type="radio"
+                  name="q5"
+                  value="c"
+                >
+                more happy
+              </label>
+
+            </div>
+
+          </form>
+
+
+          <div class="controls">
+
+            <button
+              type="button"
+              onclick="checkQuiz()"
+            >
+              Check Answers
+            </button>
+
+            <button
+              type="button"
+              class="secondary"
+              onclick="resetQuiz()"
+            >
+              Reset
+            </button>
+
+          </div>
+
+
+          <div
+            id="quizResult"
+            class="result"
+            aria-live="polite"
+          ></div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+      By Avyan &amp; For the class
+    </footer>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    const answers = {
+      q1: "a",
+      q2: "b",
+      q3: "c",
+      q4: "b",
+      q5: "b"
+    };
+
+
+    /* MINI QUIZ CHECKER */
+
+    function checkMini(number, correctAnswer) {
+
+      const selected =
+        document.querySelector(
+          `input[name="mini${number}"]:checked`
+        );
+
+      const result =
+        document.getElementById(
+          `miniResult${number}`
+        );
+
+      const next =
+        document.getElementById(
+          number === 4
+            ? "finishJourney"
+            : `next${number}`
+        );
+
+
+      if (!selected) {
+
+        result.textContent =
+          "Pick an answer first! 🧐";
+
+        result.className =
+          "mini-result bad";
+
+        return;
+      }
+
+
+      if (selected.value === correctAnswer) {
+
+        result.textContent =
+          "Correct! 🎉 Great job!";
+
+        result.className =
+          "mini-result good";
+
+        if (next) {
+          next.style.display = "inline-block";
+        }
+
+      } else {
+
+        result.textContent =
+          "Not quite. Read the explanation again and try once more! 💪";
+
+        result.className =
+          "mini-result bad";
+      }
+
+    }
+
+
+    /* UNLOCK NEXT TOPIC */
+
+    function unlockTopic(number) {
+
+      const topic =
+        document.getElementById(
+          `topic${number}`
+        );
+
+      if (topic) {
+
+        topic.classList.remove(
+          "hidden-topic"
+        );
+
+        topic.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    }
+
+
+    /* FINAL QUIZ */
+
+    function checkQuiz() {
+
+      let score = 0;
+
+
+      Object.keys(answers).forEach(
+        (question) => {
+
+          const selected =
+            document.querySelector(
+              `input[name="${question}"]:checked`
+            );
+
+          if (
+            selected &&
+            selected.value === answers[question]
+          ) {
+
+            score++;
+
+          }
+
+        }
+      );
+
+
+      const result =
+        document.getElementById(
+          "quizResult"
+        );
+
+
+      result.textContent =
+        `You scored ${score}/5! ${
+          score === 5
+            ? "Perfect! 🎉"
+            : "Keep practising — you’ve got this! 💪"
+        }`;
+
+
+      result.className =
+        score >= 4
+          ? "result good"
+          : "result bad";
+
+    }
+
+
+    /* RESET FINAL QUIZ */
+
+    function resetQuiz() {
+
+      document
+        .getElementById("quizForm")
+        .reset();
+
+
+      const result =
+        document.getElementById(
+          "quizResult"
+        );
+
+
+      result.textContent = "";
+
+      result.className = "result";
+
+    }
+
+  </script>
+
+</body>
+</html>
